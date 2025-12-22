@@ -73,6 +73,18 @@
             mix-blend-mode: screen;
         }
 
+        /* --- BACKGROUND TECH --- */
+        .bg-matrix {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 90%);
+        }
+
         /* --- LAYOUT --- */
         .container {
             max-width: 1200px;
@@ -549,8 +561,8 @@
                     <span class="skill-cat">Digital</span>
                 </div>
                 <div class="skill-box">
-                    <span class="skill-title">Google Workspace</span>
-                    <span class="skill-cat">Admin</span>
+                    <span class="skill-title">Pesquisa Tech</span>
+                    <span class="skill-cat">Inovação</span>
                 </div>
             </div>
         </section>

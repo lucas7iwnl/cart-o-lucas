@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucas Felipe | Dev & Infra</title>
-    <!-- Fontes: Space Grotesk (Títulos Tech) e Inter (Texto Leitura) -->
+    <!-- Título Atualizado -->
+    <title>Cartão Digital Lucas Felipe</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -90,6 +90,8 @@
             align-items: center;
             padding: 30px 0;
             backdrop-filter: blur(5px);
+            position: relative; /* Para o menu absoluto funcionar */
+            z-index: 100;
         }
 
         .logo {
@@ -101,6 +103,11 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
         }
 
         .nav-links a {
@@ -118,6 +125,14 @@
             bottom: -5px; left: 0; background: var(--primary); transition: 0.3s;
         }
         .nav-links a:hover::after { width: 100%; }
+
+        /* Menu Hambúrguer (Mobile) */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+        }
 
         /* --- HERO SECTION --- */
         .hero {
@@ -361,7 +376,26 @@
             .hero-img-area { width: 100%; height: 350px; margin-bottom: 30px; }
             .energy-glow { width: 250px; height: 250px; }
             h1 { font-size: 2.8rem; }
-            .nav-links { display: none; }
+            
+            /* MENU MOBILE */
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(2, 6, 23, 0.98);
+                flex-direction: column;
+                padding: 20px 0;
+                border-bottom: 1px solid var(--border-color);
+                clip-path: circle(0% at 100% 0); /* Efeito de abrir */
+                transition: clip-path 0.5s ease-in-out;
+            }
+            .nav-links.active {
+                clip-path: circle(150% at 100% 0);
+            }
+            .nav-links a { margin: 15px 0; font-size: 1.2rem; }
+
             .cursor-dot, .cursor-outline { display: none; } 
             * { cursor: auto; }
             .timeline { padding-left: 20px; }
@@ -380,11 +414,16 @@
         <!-- NAV -->
         <nav>
             <a href="#" class="logo" data-hover>Lucas<span style="color:var(--primary)">.felipe</span></a>
-            <div class="nav-links">
-                <a href="#services" data-hover>O Que Faço</a>
-                <a href="#xp" data-hover>Trajetória</a>
-                <a href="#skills" data-hover>Stack</a>
-                <a href="#contact" data-hover>Contato</a>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                &#9776; <!-- Ícone Hambúrguer -->
+            </div>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#services" data-hover onclick="toggleMenu()">O Que Faço</a>
+                <a href="#xp" data-hover onclick="toggleMenu()">Trajetória</a>
+                <a href="#skills" data-hover onclick="toggleMenu()">Stack</a>
+                <a href="#contact" data-hover onclick="toggleMenu()">Contato</a>
             </div>
         </nav>
 
@@ -398,7 +437,7 @@
                 </p>
                 <div class="btn-group">
                     <a href="#contact" class="btn btn-primary" data-hover>Iniciar Projeto</a>
-                    <a href="#xp" class="btn btn-outline" data-hover>Ver Currículo</a>
+                    <a href="#xp" class="btn btn-outline" data-hover>Ver Trajetória</a>
                 </div>
             </div>
             
@@ -406,7 +445,7 @@
             <div class="hero-img-area">
                 <div class="energy-glow"></div>
                 <!-- IMPORTANTE: Sua foto deve ser um PNG com fundo transparente -->
-                <img src="https://via.placeholder.com/400x500/00000000/ffffff?text=LUCAS+PNG" alt="Lucas Felipe" class="profile-png">
+                <img src="perfil.png" alt="Lucas.felipe" class="profile-png">
             </div>
         </section>
 
@@ -449,7 +488,7 @@
                     <div class="card" onmousemove="moveSpotlight(event)" style="margin-top: 15px;">
                         <h3>Consultor de Implementação Digital</h3>
                         <p style="color: var(--secondary); margin-bottom: 10px;">Projetos Internacionais (Autônomo)</p>
-                        <p>Atuação na criação de ambientes web e padronização visual. Foco em entregas digitais práticas e eficientes.</p>
+                        <p>Atuação estratégica na criação de ambientes web. Implementação técnica de identidade visual e otimização de processos digitais utilizando tecnologia avançada.</p>
                     </div>
                 </div>
 
@@ -516,6 +555,20 @@
 
     <!-- SCRIPTS DE INTERAÇÃO -->
     <script>
+        // MENU MOBILE TOGGLE
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        function toggleMenu() {
+            if (window.innerWidth <= 768) {
+                navLinks.classList.toggle('active');
+            }
+        }
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', toggleMenu);
+        }
+
         // TYPEWRITER
         const textElement = document.querySelector('.typewriter');
         const words = ["Suporte TI.", "Infraestrutura.", "Soluções Web."];

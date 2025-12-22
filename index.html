@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucas Felipe | Dev & Infra</title>
+    <!-- Fontes: Space Grotesk (Títulos Tech) e Inter (Texto Leitura) -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* --- TEMA AZUL & PRETO (CYBER-CORP) --- */
+            --bg-deep: #020617;       /* Preto Azulado Profundo */
+            --bg-card: rgba(15, 23, 42, 0.6); /* Vidro Escuro */
+            --border-color: rgba(56, 189, 248, 0.15); /* Borda Azul Sutil */
+            
+            --primary: #3b82f6;       /* Azul Royal (Ação) */
+            --secondary: #0ea5e9;     /* Azul Celeste (Brilho) */
+            --accent: #6366f1;        /* Índigo (Detalhes) */
+            
+            --text-main: #f8fafc;     /* Branco Gelo */
+            --text-muted: #94a3b8;    /* Cinza Azulado */
+            
+            --cursor-size: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Cursor Customizado Ativo */ }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- CURSOR MAGNÉTICO --- */
+        .cursor-dot {
+            width: 8px; height: 8px;
+            background-color: var(--secondary);
+            position: fixed; top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-outline {
+            width: 40px; height: 40px;
+            border: 1px solid var(--primary);
+            position: fixed; top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9998;
+            pointer-events: none;
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        body.hovering .cursor-outline {
+            width: 70px; height: 70px;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-color: var(--secondary);
+            mix-blend-mode: screen;
+        }
+
+        /* --- BACKGROUND TECH --- */
+        .bg-matrix {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 90%);
+        }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.95rem;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--secondary); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -5px; left: 0; background: var(--primary); transition: 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px 0;
+        }
+
+        .hero-content { max-width: 600px; position: relative; z-index: 2; }
+
+        .tag-tech {
+            font-family: 'Space Grotesk', monospace;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            padding: 5px 12px;
+            border-radius: 50px;
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        /* Efeito de Digitação */
+        .typewriter {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-right: 4px solid var(--secondary);
+            padding-right: 5px;
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        p.hero-sub {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        /* BOTÕES GLOW */
+        .btn-group { display: flex; gap: 20px; }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #000;
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+            background: #fff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        /* --- FOTO PNG COM EFEITO DE ENERGIA --- */
+        .hero-img-area {
+            position: relative;
+            width: 450px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        /* O brilho atrás do PNG */
+        .energy-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.4;
+            filter: blur(60px);
+            z-index: 1;
+            animation: pulse-glow 4s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .profile-png {
+            position: relative;
+            z-index: 2;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            /* Filtro sutil para integrar a foto ao tema azul */
+            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.2)); 
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%); /* Fade sutil nos pés */
+        }
+
+        /* --- SEÇÕES GERAIS --- */
+        section { padding: 100px 0; position: relative; }
+        
+        .section-header { margin-bottom: 60px; }
+        .section-title { font-family: 'Space Grotesk'; font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
+        .section-desc { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; }
+
+        /* --- CARDS COM SPOTLIGHT (SERVIÇOS) --- */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 35px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        /* O Spot de Luz */
+        .card::before {
+            content: ''; position: absolute;
+            top: var(--y, -50%); left: var(--x, -50%);
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 60%);
+            transform: translate(-50%, -50%);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        }
+
+        .card:hover::before { opacity: 1; }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
+
+        .card-icon { font-size: 2rem; margin-bottom: 20px; color: var(--secondary); }
+        .card h3 { font-family: 'Space Grotesk'; font-size: 1.4rem; margin-bottom: 12px; color: #fff; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* --- TIMELINE (EXPERIÊNCIA) --- */
+        .timeline {
+            border-left: 2px solid var(--border-color);
+            padding-left: 40px;
+            margin-top: 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            opacity: 0; transform: translateY(20px); transition: all 0.6s ease;
+        }
+        .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+        .timeline-dot {
+            position: absolute; left: -46px; top: 0;
+            width: 14px; height: 14px;
+            background: var(--bg-deep);
+            border: 3px solid var(--secondary);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--secondary);
+        }
+
+        .date-badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* --- SKILLS GRID --- */
+        .skills-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .skill-box:hover {
+            border-color: var(--secondary);
+            background: rgba(14, 165, 233, 0.05);
+            transform: translateY(-3px);
+        }
+        .skill-title { color: #fff; font-weight: 600; display: block; margin-bottom: 5px; }
+        .skill-cat { color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            background: #01040f;
+        }
+
+        /* --- RESPONSIVO --- */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 100px; }
+            .hero-img-area { width: 100%; height: 350px; margin-bottom: 30px; }
+            .energy-glow { width: 250px; height: 250px; }
+            h1 { font-size: 2.8rem; }
+            .nav-links { display: none; }
+            .cursor-dot, .cursor-outline { display: none; } 
+            * { cursor: auto; }
+            .timeline { padding-left: 20px; }
+            .timeline-dot { left: -26px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- INTERFACE ELEMENTS -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div class="bg-matrix"></div>
+
+    <div class="container">
+        <!-- NAV -->
+        <nav>
+            <a href="#" class="logo" data-hover>Lucas<span style="color:var(--primary)">.felipe</span></a>
+            <div class="nav-links">
+                <a href="#services" data-hover>O Que Faço</a>
+                <a href="#xp" data-hover>Trajetória</a>
+                <a href="#skills" data-hover>Stack</a>
+                <a href="#contact" data-hover>Contato</a>
+            </div>
+        </nav>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="tag-tech">SUPORTE & DIGITAL</span>
+                <h1>Analista de <br><span class="typewriter"></span></h1>
+                <p class="hero-sub">
+                    Garantindo a estabilidade de ambientes corporativos críticos. Unindo a gestão de infraestrutura de TI com a agilidade da implementação web moderna.
+                </p>
+                <div class="btn-group">
+                    <a href="#contact" class="btn btn-primary" data-hover>Iniciar Projeto</a>
+                    <a href="#xp" class="btn btn-outline" data-hover>Ver Currículo</a>
+                </div>
+            </div>
+            
+            <!-- ÁREA DA FOTO PNG -->
+            <div class="hero-img-area">
+                <div class="energy-glow"></div>
+                <!-- IMPORTANTE: Sua foto deve ser um PNG com fundo transparente -->
+                <img src="https://via.placeholder.com/400x500/00000000/ffffff?text=LUCAS+PNG" alt="Lucas Felipe" class="profile-png">
+            </div>
+        </section>
+
+        <!-- SERVIÇOS (Spotlight Cards) -->
+        <section id="services">
+            <div class="section-header">
+                <h2 class="section-title">Soluções Técnicas</h2>
+                <p class="section-desc">Foco em manter a operação rodando e criar presença digital.</p>
+            </div>
+            <div class="grid-cards">
+                <div class="card" onmousemove="moveSpotlight(event)">
+                    <div class="card-icon">🚀</div>
+                    <h3>Implementação Web</h3>
+                    <p>Desenvolvimento de interfaces rápidas e otimizadas. Portfólios e sites institucionais prontos para uso.</p>
+                </div>
+                <div class="card" onmousemove="moveSpotlight(event)">
+                    <div class="card-icon">🖥️</div>
+                    <h3>Infraestrutura Corporativa</h3>
+                    <p>Administração de servidores, gestão de redes locais e manutenção de hardware. Foco total na continuidade da operação.</p>
+                </div>
+                <div class="card" onmousemove="moveSpotlight(event)">
+                    <div class="card-icon">⚡</div>
+                    <h3>Otimização de Processos</h3>
+                    <p>Padronização de ferramentas e suporte ágil para o dia a dia da empresa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIÊNCIA (Timeline) -->
+        <section id="xp">
+            <div class="section-header">
+                <h2 class="section-title">Trajetória Profissional</h2>
+            </div>
+            
+            <div class="timeline">
+                <!-- Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="date-badge">JAN 2025 - ATUAL</span>
+                    <div class="card" onmousemove="moveSpotlight(event)" style="margin-top: 15px;">
+                        <h3>Consultor de Implementação Digital</h3>
+                        <p style="color: var(--secondary); margin-bottom: 10px;">Projetos Internacionais (Autônomo)</p>
+                        <p>Atuação na criação de ambientes web e padronização visual. Foco em entregas digitais práticas e eficientes.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="date-badge">2021 - 2025</span>
+                    <div class="card" onmousemove="moveSpotlight(event)" style="margin-top: 15px;">
+                        <h3>Analista de Suporte e Infraestrutura</h3>
+                        <p style="color: var(--secondary); margin-bottom: 10px;">Rede Ivo (Indústria)</p>
+                        <p>Responsável pelo uptime da operação. Administração de AD, Servidores, Redes, Switchs e Hardware crítico. Foco em Zero Downtime e suporte ágil.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+            <div class="section-header">
+                <h2 class="section-title">Arsenal Técnico</h2>
+            </div>
+            <div class="skills-wrapper">
+                <div class="skill-box">
+                    <span class="skill-title">Windows Server</span>
+                    <span class="skill-cat">Infraestrutura</span>
+                </div>
+                <div class="skill-box">
+                    <span class="skill-title">Active Directory</span>
+                    <span class="skill-cat">Gestão</span>
+                </div>
+                <div class="skill-box">
+                    <span class="skill-title">Parque Tecnológico</span>
+                    <span class="skill-cat">Gestão</span>
+                </div>
+                <div class="skill-box">
+                    <span class="skill-title">Redes Locais</span>
+                    <span class="skill-cat">Conectividade</span>
+                </div>
+                <div class="skill-box">
+                    <span class="skill-title">Web Dev</span>
+                    <span class="skill-cat">Digital</span>
+                </div>
+                <div class="skill-box">
+                    <span class="skill-title">Google Workspace</span>
+                    <span class="skill-cat">Admin</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTATO -->
+        <section id="contact" style="text-align: center; padding-bottom: 150px;">
+            <h2 class="section-title" style="margin-bottom: 30px;">Vamos conversar?</h2>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <a href="https://wa.me/5541988680553" class="btn btn-primary" data-hover>Chamar no WhatsApp</a>
+                <a href="mailto:lucasfelipe.flm@gmail.com" class="btn btn-outline" data-hover>Enviar Email</a>
+                <a href="https://www.linkedin.com/in/lucas-costa-b46412204" class="btn btn-outline" data-hover>LinkedIn</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 Lucas Felipe. Tech & Infra.</p>
+        </footer>
+    </div>
+
+    <!-- SCRIPTS DE INTERAÇÃO -->
+    <script>
+        // TYPEWRITER
+        const textElement = document.querySelector('.typewriter');
+        const words = ["Suporte TI.", "Infraestrutura.", "Soluções Web."];
+        let wordIndex = 0, charIndex = 0, isDeleting = false;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                textElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                setTimeout(type, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 50 : 100);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', type);
+
+        // CURSOR
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+        });
+
+        // SPOTLIGHT
+        function moveSpotlight(e) {
+            const card = e.currentTarget;
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--y', `${e.clientY - rect.top}px`);
+        }
+
+        // HOVER LINKS
+        document.querySelectorAll('[data-hover]').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        // SCROLL ANIMATION
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

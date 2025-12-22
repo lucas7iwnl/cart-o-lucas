@@ -73,18 +73,6 @@
             mix-blend-mode: screen;
         }
 
-        /* --- BACKGROUND TECH --- */
-        .bg-matrix {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: 
-                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -1;
-            mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 90%);
-        }
-
         /* --- LAYOUT --- */
         .container {
             max-width: 1200px;
@@ -398,25 +386,11 @@
 
         /* --- RESPONSIVO --- */
         @media (max-width: 768px) {
-            /* AJUSTE MOBILE - ESPAÇAMENTO DA HERO */
-            .hero {
-                flex-direction: column-reverse;
-                text-align: center;
-                padding-top: 100px;
-                padding-bottom: 40px; /* Reduzi espaço inferior */
-                min-height: auto; /* Remove altura forçada no mobile */
-            }
-            .hero-img-area { 
-                width: 100%; 
-                height: 350px; 
-                margin-bottom: 20px; /* Reduzi o gap entre foto e texto */
-            }
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 100px; }
+            .hero-img-area { width: 100%; height: 350px; margin-bottom: 30px; }
             .energy-glow { width: 250px; height: 250px; }
             h1 { font-size: 2.8rem; }
             
-            /* Ajuste geral de Seções no Mobile */
-            section { padding: 60px 0; } /* Reduzi o padding padrão de 100px para 60px */
-
             /* MENU MOBILE */
             .menu-toggle { display: block; }
             .nav-links {
@@ -428,7 +402,7 @@
                 flex-direction: column;
                 padding: 20px 0;
                 border-bottom: 1px solid var(--border-color);
-                clip-path: circle(0% at 100% 0);
+                clip-path: circle(0% at 100% 0); /* Efeito de abrir */
                 transition: clip-path 0.5s ease-in-out;
             }
             .nav-links.active {

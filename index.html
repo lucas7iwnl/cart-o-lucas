@@ -90,7 +90,7 @@
             align-items: center;
             padding: 30px 0;
             backdrop-filter: blur(5px);
-            position: relative; /* Para o menu absoluto funcionar */
+            position: relative;
             z-index: 100;
         }
 
@@ -184,7 +184,7 @@
             max-width: 500px;
         }
 
-        /* BOTÕES GLOW */
+        /* BOTÕES GLOW & PULSE */
         .btn-group { display: flex; gap: 20px; }
 
         .btn {
@@ -211,6 +211,17 @@
             transform: translateY(-2px);
             box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
             background: #fff;
+        }
+
+        /* ANIMAÇÃO DE PULSO (NOVO) */
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+
+        .btn-pulse {
+            animation: pulse-blue 2s infinite;
         }
 
         .btn-outline {
@@ -259,9 +270,13 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            /* Filtro sutil para integrar a foto ao tema azul */
-            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.2)); 
-            mask-image: linear-gradient(to bottom, black 80%, transparent 100%); /* Fade sutil nos pés */
+            /* AURA DE CONTORNO (Energia Azul) */
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.8)) 
+                    drop-shadow(0 0 25px rgba(14, 165, 233, 0.4));
+            
+            /* Correção do corte: Fade out mais suave na base para não ficar reto */
+            mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
         }
 
         /* --- SEÇÕES GERAIS --- */
@@ -436,7 +451,8 @@
                     Garantindo a estabilidade de ambientes corporativos críticos. Unindo a gestão de infraestrutura de TI com a agilidade da implementação web moderna.
                 </p>
                 <div class="btn-group">
-                    <a href="#contact" class="btn btn-primary" data-hover>Iniciar Projeto</a>
+                    <!-- Botão Principal com Pulso -->
+                    <a href="#contact" class="btn btn-primary btn-pulse" data-hover>Entrar em Contato</a>
                     <a href="#xp" class="btn btn-outline" data-hover>Ver Trajetória</a>
                 </div>
             </div>
@@ -445,7 +461,7 @@
             <div class="hero-img-area">
                 <div class="energy-glow"></div>
                 <!-- IMPORTANTE: Sua foto deve ser um PNG com fundo transparente -->
-                <img src="perfil.png" alt="Lucas.felipe" class="profile-png">
+                <img src="https://i.imgur.com/176PJM9.png" alt="Lucas Felipe" class="profile-png">
             </div>
         </section>
 
@@ -542,7 +558,8 @@
         <section id="contact" style="text-align: center; padding-bottom: 150px;">
             <h2 class="section-title" style="margin-bottom: 30px;">Vamos conversar?</h2>
             <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                <a href="https://wa.me/5541988680553" class="btn btn-primary" data-hover>Chamar no WhatsApp</a>
+                <!-- Botão WhatsApp com Pulso -->
+                <a href="https://wa.me/5541988680553" class="btn btn-primary btn-pulse" data-hover>Chamar no WhatsApp</a>
                 <a href="mailto:lucasfelipe.flm@gmail.com" class="btn btn-outline" data-hover>Enviar Email</a>
                 <a href="https://www.linkedin.com/in/lucas-costa-b46412204" class="btn btn-outline" data-hover>LinkedIn</a>
             </div>

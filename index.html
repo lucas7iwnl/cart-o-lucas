@@ -33,6 +33,17 @@
             overflow-x: hidden;
         }
 
+        /* --- CANVAS DE PARTÍCULAS --- */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Fica atrás de tudo */
+            pointer-events: none; /* Deixa clicar no site */
+        }
+
         /* --- CURSOR MAGNÉTICO --- */
         .cursor-dot {
             width: 8px; height: 8px;
@@ -60,18 +71,6 @@
             background-color: rgba(59, 130, 246, 0.1);
             border-color: var(--secondary);
             mix-blend-mode: screen;
-        }
-
-        /* --- BACKGROUND TECH --- */
-        .bg-matrix {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: 
-                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -1;
-            mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 90%);
         }
 
         /* --- LAYOUT --- */
@@ -211,6 +210,17 @@
             transform: translateY(-2px);
             box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
             background: #fff;
+        }
+
+        /* ANIMAÇÃO DE PULSO (NOVO) */
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+
+        .btn-pulse {
+            animation: pulse-blue 2s infinite;
         }
 
         .btn-outline {
@@ -412,7 +422,9 @@
     <!-- INTERFACE ELEMENTS -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
-    <div class="bg-matrix"></div>
+    
+    <!-- CANVAS DE PARTÍCULAS -->
+    <canvas id="particles-canvas"></canvas>
 
     <div class="container">
         <!-- NAV -->
@@ -555,7 +567,7 @@
         </section>
 
         <footer>
-            <p>© 2025 Lucas Felipe. Tech & Infra.</p>
+            <p>© 2025 Lucas Felipe. Tech.</p>
         </footer>
     </div>
 
@@ -636,6 +648,102 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+
+        // PARTICLE SYSTEM (CONSTELAÇÃO)
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5; // Velocidade lenta
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+                this.color = `rgba(59, 130, 246, ${Math.random() * 0.5 + 0.1})`; // Azul com transparência variável
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce nas bordas
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const particleCount = Math.min(window.innerWidth / 10, 100); // Quantidade baseada na largura
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        let mouseX = 0;
+        let mouseY = 0;
+        window.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Conexões
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${1 - distance / 150})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Interação com o Mouse (Gravidade/Atração)
+                const dx = mouseX - particles[i].x;
+                const dy = mouseY - particles[i].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 200) {
+                    const force = (200 - distance) / 200;
+                    // Atrai suavemente para o mouse
+                    particles[i].vx += (dx / distance) * force * 0.05;
+                    particles[i].vy += (dy / distance) * force * 0.05;
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
     </script>
 </body>
 </html>

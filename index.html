@@ -73,18 +73,6 @@
             mix-blend-mode: screen;
         }
 
-        /* --- BACKGROUND TECH --- */
-        .bg-matrix {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: 
-                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -1;
-            mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 90%);
-        }
-
         /* --- LAYOUT --- */
         .container {
             max-width: 1200px;
@@ -150,7 +138,7 @@
             min-height: 85vh;
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* Mantém o conteúdo alinhado à esquerda no desktop */
+            justify-content: flex-start;
             padding: 50px 0;
         }
 
@@ -176,7 +164,6 @@
             font-weight: 700;
         }
 
-        /* Efeito de Digitação */
         .typewriter {
             display: inline-block;
             background: linear-gradient(90deg, var(--secondary), var(--primary));
@@ -195,7 +182,6 @@
             max-width: 500px;
         }
 
-        /* BOTÕES GLOW */
         .btn-group { display: flex; gap: 20px; }
 
         .btn {
@@ -224,7 +210,6 @@
             background: #fff;
         }
 
-        /* ANIMAÇÃO DE PULSO (NOVO) */
         @keyframes pulse-blue {
             0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
@@ -254,7 +239,7 @@
         .section-title { font-family: 'Space Grotesk'; font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
         .section-desc { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; }
 
-        /* --- CARDS COM SPOTLIGHT (SERVIÇOS) --- */
+        /* --- CARDS COM SPOTLIGHT --- */
         .grid-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -271,7 +256,6 @@
             transition: transform 0.3s;
         }
 
-        /* O Spot de Luz */
         .card::before {
             content: ''; position: absolute;
             top: var(--y, -50%); left: var(--x, -50%);
@@ -288,7 +272,7 @@
         .card h3 { font-family: 'Space Grotesk'; font-size: 1.4rem; margin-bottom: 12px; color: #fff; }
         .card p { color: var(--text-muted); font-size: 0.95rem; }
 
-        /* --- TIMELINE (EXPERIÊNCIA) --- */
+        /* --- TIMELINE --- */
         .timeline {
             border-left: 2px solid var(--border-color);
             padding-left: 40px;
@@ -322,7 +306,7 @@
             margin-bottom: 10px;
         }
 
-        /* --- SKILLS GRID --- */
+        /* --- SKILLS --- */
         .skills-wrapper {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -359,8 +343,6 @@
             h1 { font-size: 2.8rem; }
             .hero-sub { margin-left: auto; margin-right: auto; }
             .btn-group { justify-content: center; }
-            
-            /* MENU MOBILE */
             .menu-toggle { display: block; }
             .nav-links {
                 position: absolute;
@@ -371,14 +353,13 @@
                 flex-direction: column;
                 padding: 20px 0;
                 border-bottom: 1px solid var(--border-color);
-                clip-path: circle(0% at 100% 0); /* Efeito de abrir */
+                clip-path: circle(0% at 100% 0);
                 transition: clip-path 0.5s ease-in-out;
             }
             .nav-links.active {
                 clip-path: circle(150% at 100% 0);
             }
             .nav-links a { margin: 15px 0; font-size: 1.2rem; }
-
             .cursor-dot, .cursor-outline { display: none; } 
             * { cursor: auto; }
             .timeline { padding-left: 20px; }
@@ -388,11 +369,9 @@
 </head>
 <body>
 
-    <!-- INTERFACE ELEMENTS -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
     
-    <!-- CANVAS DE PARTÍCULAS -->
     <canvas id="particles-canvas"></canvas>
 
     <div class="container">
@@ -401,7 +380,7 @@
             <a href="#" class="logo" data-hover>Lucas<span style="color:var(--primary)"> Felipe</span></a>
             
             <div class="menu-toggle" id="mobile-menu">
-                &#9776; <!-- Ícone Hambúrguer -->
+                &#9776;
             </div>
 
             <div class="nav-links" id="nav-links">
@@ -421,14 +400,13 @@
                     Garantindo a estabilidade de ambientes corporativos críticos. Unindo a gestão de infraestrutura de TI com a agilidade da implementação web moderna.
                 </p>
                 <div class="btn-group">
-                    <!-- Botão Principal com Pulso -->
                     <a href="#contact" class="btn btn-primary btn-pulse" data-hover>Entrar em Contato</a>
                     <a href="#xp" class="btn btn-outline" data-hover>Ver Trajetória</a>
                 </div>
             </div>
         </section>
 
-        <!-- SERVIÇOS (Spotlight Cards) -->
+        <!-- SERVIÇOS -->
         <section id="services">
             <div class="section-header">
                 <h2 class="section-title">Soluções Técnicas</h2>
@@ -437,8 +415,12 @@
             <div class="grid-cards">
                 <div class="card" onmousemove="moveSpotlight(event)">
                     <div class="card-icon">🚀</div>
-                    <h3>Implementação Web</h3>
-                    <p>Desenvolvimento de interfaces rápidas e otimizadas. Portfólios e sites institucionais prontos para uso.</p>
+                    <h3>Iniciativas Tecnológicas & Otimização</h3>
+                    <p>
+                        Uso estratégico de IA para criar interfaces (HTML) e documentos dinâmicos. <br>
+                        Foco em prototipagem rápida e automação para ganho de produtividade. <br>
+                        Resolução de problemas operacionais com agilidade e visão inovadora.
+                    </p>
                 </div>
                 <div class="card" onmousemove="moveSpotlight(event)">
                     <div class="card-icon">🖥️</div>
@@ -453,14 +435,13 @@
             </div>
         </section>
 
-        <!-- EXPERIÊNCIA (Timeline) -->
+        <!-- EXPERIÊNCIA -->
         <section id="xp">
             <div class="section-header">
                 <h2 class="section-title">Trajetória Profissional</h2>
             </div>
             
             <div class="timeline">
-                <!-- Item 1 -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <span class="date-badge">JAN 2025 - ATUAL</span>
@@ -471,7 +452,6 @@
                     </div>
                 </div>
 
-                <!-- Item 2 -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <span class="date-badge">2021 - 2025</span>
@@ -521,7 +501,6 @@
         <section id="contact" style="text-align: center; padding-bottom: 150px;">
             <h2 class="section-title" style="margin-bottom: 30px;">Vamos conversar?</h2>
             <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                <!-- Botão WhatsApp com Pulso -->
                 <a href="https://wa.me/5541988680553" class="btn btn-primary btn-pulse" data-hover>Chamar no WhatsApp</a>
                 <a href="mailto:lucasfelipe.flm@gmail.com" class="btn btn-outline" data-hover>Enviar Email</a>
                 <a href="https://www.linkedin.com/in/lucas-costa-b46412204" class="btn btn-outline" data-hover>LinkedIn</a>
@@ -533,9 +512,7 @@
         </footer>
     </div>
 
-    <!-- SCRIPTS DE INTERAÇÃO -->
     <script>
-        // MENU MOBILE TOGGLE
         const menuToggle = document.getElementById('mobile-menu');
         const navLinks = document.getElementById('nav-links');
 
@@ -549,7 +526,6 @@
             menuToggle.addEventListener('click', toggleMenu);
         }
 
-        // TYPEWRITER
         const textElement = document.querySelector('.typewriter');
         const words = ["Suporte TI.", "Infraestrutura.", "Soluções Web."];
         let wordIndex = 0, charIndex = 0, isDeleting = false;
@@ -577,7 +553,6 @@
         }
         document.addEventListener('DOMContentLoaded', type);
 
-        // CURSOR
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
 
@@ -589,7 +564,6 @@
             cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
         });
 
-        // SPOTLIGHT
         function moveSpotlight(e) {
             const card = e.currentTarget;
             const rect = card.getBoundingClientRect();
@@ -597,13 +571,11 @@
             card.style.setProperty('--y', `${e.clientY - rect.top}px`);
         }
 
-        // HOVER LINKS
         document.querySelectorAll('[data-hover]').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
         });
 
-        // SCROLL ANIMATION
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -611,7 +583,6 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
 
-        // PARTICLE SYSTEM (CONSTELAÇÃO)
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -627,17 +598,15 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5; // Velocidade lenta
+                this.vx = (Math.random() - 0.5) * 0.5;
                 this.vy = (Math.random() - 0.5) * 0.5;
                 this.size = Math.random() * 2 + 1;
-                this.color = `rgba(59, 130, 246, ${Math.random() * 0.5 + 0.1})`; // Azul com transparência variável
+                this.color = `rgba(59, 130, 246, ${Math.random() * 0.5 + 0.1})`;
             }
 
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-
-                // Bounce nas bordas
                 if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
             }
@@ -652,7 +621,7 @@
 
         function initParticles() {
             particles = [];
-            const particleCount = Math.min(window.innerWidth / 10, 100); // Quantidade baseada na largura
+            const particleCount = Math.min(window.innerWidth / 10, 100);
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -667,17 +636,13 @@
 
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
-
-                // Conexões
                 for (let j = i; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-
                     if (distance < 150) {
                         ctx.strokeStyle = `rgba(59, 130, 246, ${1 - distance / 150})`;
                         ctx.lineWidth = 0.5;
@@ -687,15 +652,11 @@
                         ctx.stroke();
                     }
                 }
-
-                // Interação com o Mouse (Gravidade/Atração)
                 const dx = mouseX - particles[i].x;
                 const dy = mouseY - particles[i].y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                
                 if (distance < 200) {
                     const force = (200 - distance) / 200;
-                    // Atrai suavemente para o mouse
                     particles[i].vx += (dx / distance) * force * 0.05;
                     particles[i].vy += (dy / distance) * force * 0.05;
                 }
@@ -705,7 +666,6 @@
 
         initParticles();
         animateParticles();
-
     </script>
 </body>
 </html>

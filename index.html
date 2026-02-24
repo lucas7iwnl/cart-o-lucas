@@ -33,7 +33,7 @@
             overflow-x: hidden;
         }
 
-        /* --- CANVAS DE PARTÍCULAS --- */
+        /* --- CANVAS DE PARTÍCULAS (REATIVADO) --- */
         #particles-canvas {
             position: fixed;
             top: 0;
@@ -125,7 +125,6 @@
         }
         .nav-links a:hover::after { width: 100%; }
 
-        /* Menu Hambúrguer (Mobile) */
         .menu-toggle {
             display: none;
             font-size: 1.8rem;
@@ -133,16 +132,21 @@
             cursor: pointer;
         }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION ATUALIZADA (SEM ESPAÇO VAZIO) --- */
         .hero {
             min-height: 85vh;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center; /* Centraliza horizontalmente */
+            text-align: center;      /* Centraliza o texto */
             padding: 50px 0;
         }
 
-        .hero-content { max-width: 600px; position: relative; z-index: 2; }
+        .hero-content { 
+            max-width: 800px; /* Aumentado para preencher o centro */
+            position: relative; 
+            z-index: 2; 
+        }
 
         .tag-tech {
             font-family: 'Space Grotesk', monospace;
@@ -178,11 +182,15 @@
         p.hero-sub {
             font-size: 1.15rem;
             color: var(--text-muted);
-            margin-bottom: 40px;
-            max-width: 500px;
+            margin: 0 auto 40px; /* Centralizado */
+            max-width: 600px;
         }
 
-        .btn-group { display: flex; gap: 20px; }
+        .btn-group { 
+            display: flex; 
+            gap: 20px; 
+            justify-content: center; /* Centraliza os botões */
+        }
 
         .btn {
             padding: 14px 32px;
@@ -235,9 +243,9 @@
         /* --- SEÇÕES GERAIS --- */
         section { padding: 100px 0; position: relative; }
         
-        .section-header { margin-bottom: 60px; }
+        .section-header { margin-bottom: 60px; text-align: center; }
         .section-title { font-family: 'Space Grotesk'; font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
-        .section-desc { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; }
+        .section-desc { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
         /* --- CARDS COM SPOTLIGHT --- */
         .grid-cards {
@@ -277,6 +285,9 @@
             border-left: 2px solid var(--border-color);
             padding-left: 40px;
             margin-top: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .timeline-item {
@@ -337,9 +348,8 @@
             background: #01040f;
         }
 
-        /* --- RESPONSIVO --- */
         @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 100px; align-items: center; justify-content: center; }
+            .hero { text-align: center; padding-top: 100px; }
             h1 { font-size: 2.8rem; }
             .hero-sub { margin-left: auto; margin-right: auto; }
             .btn-group { justify-content: center; }
@@ -359,7 +369,7 @@
             .nav-links.active {
                 clip-path: circle(150% at 100% 0);
             }
-            .nav-links a { margin: 15px 0; font-size: 1.2rem; }
+            .nav-links a { margin: 15px 0; font-size: 1.2rem; margin-left: 0; }
             .cursor-dot, .cursor-outline { display: none; } 
             * { cursor: auto; }
             .timeline { padding-left: 20px; }
@@ -372,17 +382,13 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
     
+    <!-- CANVAS DE PARTÍCULAS INTERATIVO -->
     <canvas id="particles-canvas"></canvas>
 
     <div class="container">
-        <!-- NAV -->
         <nav>
             <a href="#" class="logo" data-hover>Lucas<span style="color:var(--primary)"> Felipe</span></a>
-            
-            <div class="menu-toggle" id="mobile-menu">
-                &#9776;
-            </div>
-
+            <div class="menu-toggle" id="mobile-menu">&#9776;</div>
             <div class="nav-links" id="nav-links">
                 <a href="#services" data-hover onclick="toggleMenu()">O Que Faço</a>
                 <a href="#xp" data-hover onclick="toggleMenu()">Trajetória</a>
@@ -391,7 +397,7 @@
             </div>
         </nav>
 
-        <!-- HERO -->
+        <!-- HERO CENTRALIZADO -->
         <section class="hero">
             <div class="hero-content">
                 <span class="tag-tech">SUPORTE & TECH</span>
@@ -435,12 +441,10 @@
             </div>
         </section>
 
-        <!-- EXPERIÊNCIA -->
         <section id="xp">
             <div class="section-header">
                 <h2 class="section-title">Trajetória Profissional</h2>
             </div>
-            
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
@@ -454,41 +458,20 @@
             </div>
         </section>
 
-        <!-- SKILLS -->
         <section id="skills">
             <div class="section-header">
                 <h2 class="section-title">Arsenal Técnico</h2>
             </div>
             <div class="skills-wrapper">
-                <div class="skill-box">
-                    <span class="skill-title">Windows Server</span>
-                    <span class="skill-cat">Infraestrutura</span>
-                </div>
-                <div class="skill-box">
-                    <span class="skill-title">Active Directory</span>
-                    <span class="skill-cat">Gestão</span>
-                </div>
-                <div class="skill-box">
-                    <span class="skill-title">Parque Tecnológico</span>
-                    <span class="skill-cat">Gestão</span>
-                </div>
-                <div class="skill-box">
-                    <span class="skill-title">Redes Locais</span>
-                    <span class="skill-cat">Conectividade</span>
-                </div>
-                <div class="skill-box">
-                    <span class="skill-title">IA Generativa</span>
-                    <span class="skill-cat">Inovação</span>
-                </div>
-                <!-- SUBSTITUÍDO: REFERÊNCIA AO PERFIL PESSOAL -->
-                <div class="skill-box">
-                    <span class="skill-title">Perfil Analítico</span>
-                    <span class="skill-cat">Resolução de Problemas</span>
-                </div>
+                <div class="skill-box"><span class="skill-title">Windows Server</span><span class="skill-cat">Infraestrutura</span></div>
+                <div class="skill-box"><span class="skill-title">Active Directory</span><span class="skill-cat">Gestão</span></div>
+                <div class="skill-box"><span class="skill-title">Parque Tecnológico</span><span class="skill-cat">Gestão</span></div>
+                <div class="skill-box"><span class="skill-title">Redes Locais</span><span class="skill-cat">Conectividade</span></div>
+                <div class="skill-box"><span class="skill-title">IA Generativa</span><span class="skill-cat">Inovação</span></div>
+                <div class="skill-box"><span class="skill-title">Perfil Analítico</span><span class="skill-cat">Resolução de Problemas</span></div>
             </div>
         </section>
 
-        <!-- CONTATO -->
         <section id="contact" style="text-align: center; padding-bottom: 150px;">
             <h2 class="section-title" style="margin-bottom: 30px;">Vamos conversar?</h2>
             <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
@@ -498,68 +481,44 @@
             </div>
         </section>
 
-        <footer>
-            <p>© 2025 Lucas Felipe. Tech.</p>
-        </footer>
+        <footer><p>© 2025 Lucas Felipe. Tech.</p></footer>
     </div>
 
     <script>
+        // MENU MOBILE
         const menuToggle = document.getElementById('mobile-menu');
         const navLinks = document.getElementById('nav-links');
+        function toggleMenu() { if (window.innerWidth <= 768) navLinks.classList.toggle('active'); }
+        if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
 
-        function toggleMenu() {
-            if (window.innerWidth <= 768) {
-                navLinks.classList.toggle('active');
-            }
-        }
-
-        if (menuToggle) {
-            menuToggle.addEventListener('click', toggleMenu);
-        }
-
+        // TYPEWRITER
         const textElement = document.querySelector('.typewriter');
         const words = ["Suporte TI.", "Infraestrutura.", "Soluções Tecnológicas."];
         let wordIndex = 0, charIndex = 0, isDeleting = false;
-
         function type() {
             const currentWord = words[wordIndex];
-            if (isDeleting) {
-                textElement.textContent = currentWord.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                textElement.textContent = currentWord.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            if (!isDeleting && charIndex === currentWord.length) {
-                isDeleting = true;
-                setTimeout(type, 2000);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
-                setTimeout(type, 500);
-            } else {
-                setTimeout(type, isDeleting ? 50 : 100);
-            }
+            textElement.textContent = isDeleting ? currentWord.substring(0, charIndex - 1) : currentWord.substring(0, charIndex + 1);
+            charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
+            if (!isDeleting && charIndex === currentWord.length) { isDeleting = true; setTimeout(type, 2000); }
+            else if (isDeleting && charIndex === 0) { isDeleting = false; wordIndex = (wordIndex + 1) % words.length; setTimeout(type, 500); }
+            else setTimeout(type, isDeleting ? 50 : 100);
         }
         document.addEventListener('DOMContentLoaded', type);
 
+        // CURSOR
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
-
         window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            cursorDot.style.left = `${e.clientX}px`;
+            cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
         });
 
+        // SPOTLIGHT
         function moveSpotlight(e) {
-            const card = e.currentTarget;
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty('--x', `${e.clientX - rect.left}px`);
-            card.style.setProperty('--y', `${e.clientY - rect.top}px`);
+            const rect = e.currentTarget.getBoundingClientRect();
+            e.currentTarget.style.setProperty('--x', `${e.clientX - rect.left}px`);
+            e.currentTarget.style.setProperty('--y', `${e.clientY - rect.top}px`);
         }
 
         document.querySelectorAll('[data-hover]').forEach(el => {
@@ -568,20 +527,15 @@
         });
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
 
+        // SISTEMA DE PARTÍCULAS
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener('resize', resize);
         resize();
 
@@ -594,67 +548,47 @@
                 this.size = Math.random() * 2 + 1;
                 this.color = `rgba(59, 130, 246, ${Math.random() * 0.5 + 0.1})`;
             }
-
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
+                this.x += this.vx; this.y += this.vy;
                 if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
             }
-
             draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.fillStyle = this.color; ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
             }
         }
 
         function initParticles() {
             particles = [];
             const particleCount = Math.min(window.innerWidth / 10, 100);
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
+            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
         }
 
-        let mouseX = 0;
-        let mouseY = 0;
-        window.addEventListener('mousemove', e => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
+        let mouseX = 0, mouseY = 0;
+        window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
 
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+            particles.forEach((p, i) => {
+                p.update(); p.draw();
                 for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const distance = Math.sqrt((p.x - particles[j].x)**2 + (p.y - particles[j].y)**2);
                     if (distance < 150) {
                         ctx.strokeStyle = `rgba(59, 130, 246, ${1 - distance / 150})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
+                        ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
                     }
                 }
-                const dx = mouseX - particles[i].x;
-                const dy = mouseY - particles[i].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < 200) {
-                    const force = (200 - distance) / 200;
-                    particles[i].vx += (dx / distance) * force * 0.05;
-                    particles[i].vy += (dy / distance) * force * 0.05;
+                const mDist = Math.sqrt((mouseX - p.x)**2 + (mouseY - p.y)**2);
+                if (mDist < 200) {
+                    const force = (200 - mDist) / 200;
+                    p.vx += ((mouseX - p.x) / mDist) * force * 0.05;
+                    p.vy += ((mouseY - p.y) / mDist) * force * 0.05;
                 }
-            }
+            });
             requestAnimationFrame(animateParticles);
         }
-
         initParticles();
         animateParticles();
     </script>

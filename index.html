@@ -150,7 +150,7 @@
             min-height: 85vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start; /* Mantém o conteúdo alinhado à esquerda no desktop */
             padding: 50px 0;
         }
 
@@ -245,49 +245,6 @@
             border-color: var(--secondary);
             color: var(--secondary);
             background: rgba(14, 165, 233, 0.05);
-        }
-
-        /* --- FOTO PNG COM EFEITO DE ENERGIA --- */
-        .hero-img-area {
-            position: relative;
-            width: 450px;
-            height: 500px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-        }
-
-        /* O brilho atrás do PNG */
-        .energy-glow {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 350px; height: 350px;
-            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            opacity: 0.4;
-            filter: blur(60px);
-            z-index: 1;
-            animation: pulse-glow 4s infinite alternate;
-        }
-
-        @keyframes pulse-glow {
-            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.9); }
-            100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.1); }
-        }
-
-        .profile-png {
-            position: relative;
-            z-index: 2;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            /* AURA DE CONTORNO (Energia Azul) */
-            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.8)) 
-                    drop-shadow(0 0 25px rgba(14, 165, 233, 0.4));
-            
-            /* Correção do corte: Fade out mais suave na base para não ficar reto */
-            mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
         }
 
         /* --- SEÇÕES GERAIS --- */
@@ -398,10 +355,10 @@
 
         /* --- RESPONSIVO --- */
         @media (max-width: 768px) {
-            .hero { flex-direction: column-reverse; text-align: center; padding-top: 100px; }
-            .hero-img-area { width: 100%; height: 350px; margin-bottom: 30px; }
-            .energy-glow { width: 250px; height: 250px; }
+            .hero { flex-direction: column; text-align: center; padding-top: 100px; align-items: center; justify-content: center; }
             h1 { font-size: 2.8rem; }
+            .hero-sub { margin-left: auto; margin-right: auto; }
+            .btn-group { justify-content: center; }
             
             /* MENU MOBILE */
             .menu-toggle { display: block; }
@@ -468,13 +425,6 @@
                     <a href="#contact" class="btn btn-primary btn-pulse" data-hover>Entrar em Contato</a>
                     <a href="#xp" class="btn btn-outline" data-hover>Ver Trajetória</a>
                 </div>
-            </div>
-            
-            <!-- ÁREA DA FOTO (Placeholder Genérico) -->
-            <div class="hero-img-area">
-                <div class="energy-glow"></div>
-                <!-- Foto removida e substituída por um placeholder transparente -->
-                <img src="https://via.placeholder.com/400x500/00000000/3b82f6?text=LUCAS+FELIPE" alt="Lucas Felipe" class="profile-png">
             </div>
         </section>
 

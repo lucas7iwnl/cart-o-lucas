@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
             --cursor-size: 20px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Cursor Customizado Ativo */ }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body {
             background-color: var(--bg-deep);
@@ -40,8 +40,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Fica atrás de tudo */
-            pointer-events: none; /* Deixa clicar no site */
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* --- CURSOR MAGNÉTICO --- */
@@ -397,7 +397,7 @@
                 <span class="tag-tech">SUPORTE & TECH</span>
                 <h1>Analista de <br><span class="typewriter"></span></h1>
                 <p class="hero-sub">
-                    Garantindo a estabilidade de ambientes corporativos críticos. Unindo a gestão de infraestrutura de TI com a agilidade da implementação web moderna.
+                    Garantindo a estabilidade de ambientes corporativos críticos. Unindo a gestão de infraestrutura de TI com a agilidade da implementação tecnológica moderna.
                 </p>
                 <div class="btn-group">
                     <a href="#contact" class="btn btn-primary btn-pulse" data-hover>Entrar em Contato</a>
@@ -410,16 +410,16 @@
         <section id="services">
             <div class="section-header">
                 <h2 class="section-title">Soluções Técnicas</h2>
-                <p class="section-desc">Foco em manter a operação rodando e criar presença digital.</p>
+                <p class="section-desc">Foco em manter a operação ativa e aplicar inovação estratégica.</p>
             </div>
             <div class="grid-cards">
                 <div class="card" onmousemove="moveSpotlight(event)">
                     <div class="card-icon">🚀</div>
-                    <h3>Iniciativas Tecnológicas & Otimização</h3>
+                    <h3>Iniciativas Tecnológicas & Visão Estratégica</h3>
                     <p>
-                        Uso estratégico de IA para criar interfaces (HTML) e documentos dinâmicos. <br>
-                        Foco em prototipagem rápida e automação para ganho de produtividade. <br>
-                        Resolução de problemas operacionais com agilidade e visão inovadora.
+                        Uso inteligente de IA para criar interfaces personalizadas e sistemas dinâmicos. <br>
+                        Foco em prototipagem rápida e na entrega de soluções que priorizam a agilidade. <br>
+                        Comprometido em transformar desafios técnicos em diferenciais reais através de uma abordagem dedicada.
                     </p>
                 </div>
                 <div class="card" onmousemove="moveSpotlight(event)">
@@ -430,7 +430,7 @@
                 <div class="card" onmousemove="moveSpotlight(event)">
                     <div class="card-icon">⚡</div>
                     <h3>Otimização de Processos</h3>
-                    <p>Padronização de ferramentas e suporte ágil para o dia a dia da empresa.</p>
+                    <p>Padronização de ferramentas e suporte ágil para garantir a eficiência máxima no dia a dia da empresa.</p>
                 </div>
             </div>
         </section>
@@ -444,21 +444,11 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
-                    <span class="date-badge">JAN 2025 - ATUAL</span>
-                    <div class="card" onmousemove="moveSpotlight(event)" style="margin-top: 15px;">
-                        <h3>Consultor de Implementação Digital</h3>
-                        <p style="color: var(--secondary); margin-bottom: 10px;">Projetos Internacionais (Autônomo)</p>
-                        <p>Atuação estratégica na criação de ambientes web. Implementação técnica de identidade visual e otimização de processos digitais utilizando tecnologia avançada.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <span class="date-badge">2021 - 2025</span>
+                    <span class="date-badge">2022 - 2025</span>
                     <div class="card" onmousemove="moveSpotlight(event)" style="margin-top: 15px;">
                         <h3>Analista de Suporte e Infraestrutura</h3>
                         <p style="color: var(--secondary); margin-bottom: 10px;">Rede Ivo (Indústria)</p>
-                        <p>Responsável pelo uptime da operação. Administração de AD, Servidores, Redes, Switchs e Hardware crítico. Foco em Zero Downtime e suporte ágil.</p>
+                        <p>Responsável pela estabilidade da operação. Administração de AD, Servidores, Redes e Hardware crítico. Foco em excelência técnica e suporte resolutivo.</p>
                     </div>
                 </div>
             </div>
@@ -487,12 +477,13 @@
                     <span class="skill-cat">Conectividade</span>
                 </div>
                 <div class="skill-box">
-                    <span class="skill-title">Web Dev</span>
-                    <span class="skill-cat">Digital</span>
+                    <span class="skill-title">IA Generativa</span>
+                    <span class="skill-cat">Inovação</span>
                 </div>
+                <!-- SUBSTITUÍDO: REFERÊNCIA AO PERFIL PESSOAL -->
                 <div class="skill-box">
-                    <span class="skill-title">Google Workspace</span>
-                    <span class="skill-cat">Admin</span>
+                    <span class="skill-title">Perfil Analítico</span>
+                    <span class="skill-cat">Resolução de Problemas</span>
                 </div>
             </div>
         </section>
@@ -527,7 +518,7 @@
         }
 
         const textElement = document.querySelector('.typewriter');
-        const words = ["Suporte TI.", "Infraestrutura.", "Soluções Web."];
+        const words = ["Suporte TI.", "Infraestrutura.", "Soluções Tecnológicas."];
         let wordIndex = 0, charIndex = 0, isDeleting = false;
 
         function type() {
